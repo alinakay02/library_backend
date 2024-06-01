@@ -12,5 +12,6 @@ public class UserDto {
     private String login;
     private String patronymic;
     private String password;
+    private String cardId;
 
 }

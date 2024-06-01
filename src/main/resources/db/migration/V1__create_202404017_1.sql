@@ -64,7 +64,8 @@ create table lib_user (
     name     varchar(32) not null,
     surname  varchar(32) not null,
     patronymic varchar(32),
-    password varchar(256) not null
+    password varchar(256) not null,
+    cardId varchar(12)
 );
 
 create table order_book (

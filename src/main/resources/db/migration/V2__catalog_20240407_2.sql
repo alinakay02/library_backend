@@ -120,23 +120,23 @@ VALUES
     (14, 14),
     (15, 8);
 
-INSERT INTO lib_user (id, role_id, login, name, surname, patronymic, password)
+INSERT INTO lib_user (id, role_id, login, name, surname, patronymic, password, cardId)
 VALUES
-    (nextval('SEQ_LIB_USER'), 1, 'q', 'Иван', 'Петров', 'Алексеевич', 'password1'),
-    (nextval('SEQ_LIB_USER'), 1, 'qq', 'Петр', 'Войченко', 'Алексеевич', 'password2'),
-    (nextval('SEQ_LIB_USER'), 2, 'qqq', 'Админ', 'Админ', 'Алексеевич', 'adminpassword'),
-    (nextval('SEQ_LIB_USER'), 1, 'qqqq', 'Сидор', 'Сидоров', 'Алексеевич', 'password3'),
-    (nextval('SEQ_LIB_USER'), 1, 'w', 'Елена', 'Смирнова', 'Алексеевна', 'password4'),
-    (nextval('SEQ_LIB_USER'), 2, 'ww', 'Модератор', 'Модератор', 'Алексеевич', 'adminpassword2'),
-    (nextval('SEQ_LIB_USER'), 1, 'www', 'Анна', 'Кузнецова', 'Алексеевна', 'password5'),
-    (nextval('SEQ_LIB_USER'), 1, 'wwww', 'Дмитрий', 'Попов', 'Алексеевич', 'password6'),
-    (nextval('SEQ_LIB_USER'), 1, 'e', 'Светлана', 'Морозова', 'Алексеевна', 'password7'),
-    (nextval('SEQ_LIB_USER'), 1, 'ee', 'Алексей', 'Новиков', 'Алексеевич', 'password8'),
-    (nextval('SEQ_LIB_USER'), 1, 'eee', 'Мария', 'Павлова', 'Алексеевна', 'password9'),
-    (nextval('SEQ_LIB_USER'), 1, 'eeee', 'Артем', 'Волков', 'Алексеевич', 'password10'),
-    (nextval('SEQ_LIB_USER'), 1, 'r', 'Татьяна', 'Соловьева', 'Алексеевна', 'password11'),
-    (nextval('SEQ_LIB_USER'), 2, 'rr', 'Суперадмин', 'Суперадмин', 'Суперадмин','superadminpassword'),
-    (nextval('SEQ_LIB_USER'), 1, 'rrr', 'Ольга', 'Иванова', 'Алексеевна', 'password12');
+    (nextval('SEQ_LIB_USER'), 1, 'q', 'Иван', 'Петров', 'Алексеевич', 'password1', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'qq', 'Петр', 'Войченко', 'Алексеевич', 'password2', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 2, 'qqq', 'Админ', 'Админ', 'Алексеевич', 'adminpassword', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'qqqq', 'Сидор', 'Сидоров', 'Алексеевич', 'password3', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'w', 'Елена', 'Смирнова', 'Алексеевна', 'password4', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 2, 'ww', 'Модератор', 'Модератор', 'Алексеевич', 'adminpassword2', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'www', 'Анна', 'Кузнецова', 'Алексеевна', 'password5', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'wwww', 'Дмитрий', 'Попов', 'Алексеевич', 'password6', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'e', 'Светлана', 'Морозова', 'Алексеевна', 'password7', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'ee', 'Алексей', 'Новиков', 'Алексеевич', 'password8', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'eee', 'Мария', 'Павлова', 'Алексеевна', 'password9', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'eeee', 'Артем', 'Волков', 'Алексеевич', 'password10', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'r', 'Татьяна', 'Соловьева', 'Алексеевна', 'password11', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 2, 'rr', 'Суперадмин', 'Суперадмин', 'Суперадмин','superadminpassword', 'AHA552602345'),
+    (nextval('SEQ_LIB_USER'), 1, 'rrr', 'Ольга', 'Иванова', 'Алексеевна', 'password12', 'AHA552602345');
 
 INSERT INTO order_book (date, state, book_id, id, user_id)
 VALUES

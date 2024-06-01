@@ -35,6 +35,9 @@ public class User implements Serializable {
     @Column(name = "PATRONYMIC", length = 32)
     private String patronymic;
 
+    @Column(name = "CARDID", length = 12)
+    private String cardId;
+
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_ID", nullable = false)
     private Role role;
