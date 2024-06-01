@@ -31,10 +31,18 @@ public class OrderBookService {
         return orderBookRepository.countByDateBetween(startOfYear, endOfYear);
     }
 
-    // Получение всех активных заявок на бронирование книг
+    // Получение списка заявок ожидающих одобрения (state = null)
     @Transactional(readOnly = true)
-    public List<OrderBookDto> findActiveOrders() {
-        return orderBookRepository.findActiveOrders().stream()
+    public List<OrderBookDto> findPendingOrders() {
+        return orderBookRepository.findPendingOrders().stream()
+            .map(this::convertToOrderBookDto)
+            .collect(Collectors.toList());
+    }
+
+    // Получение списка одобренных заявок (state = true)
+    @Transactional(readOnly = true)
+    public List<OrderBookDto> findApprovedOrders() {
+        return orderBookRepository.findApprovedOrders().stream()
             .map(this::convertToOrderBookDto)
             .collect(Collectors.toList());
     }

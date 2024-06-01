@@ -32,8 +32,14 @@ public class OrderBookController {
 
     // Получение всех активных заявок на бронирование книг
     @GetMapping("/new")
-    public List<OrderBookDto> getActiveOrders() {
-        return orderBookService.findActiveOrders();
+    public ResponseEntity<List<OrderBookDto>> getPendingOrders() {
+        return ResponseEntity.ok(orderBookService.findPendingOrders());
+    }
+
+    // Получение списка одобренных заявок
+    @GetMapping("/approved")
+    public ResponseEntity<List<OrderBookDto>> getApprovedOrders() {
+        return ResponseEntity.ok(orderBookService.findApprovedOrders());
     }
 
     // Одобрение заявки на бронирование книги
