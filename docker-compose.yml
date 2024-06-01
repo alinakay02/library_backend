@@ -1,0 +1,37 @@
+version: '3.5'
+
+services:
+
+    takm-service:
+        build:
+            context: .
+            args:
+                ACTIVE_PROFILE: dev
+        container_name: takm-service2
+        user: admin
+        ports:
+            - "8084:8084"
+        restart: unless-stopped
+        depends_on:
+            lib-db:
+                condition: service_started
+        networks:
+            - localnet
+
+    lib-db:
+        container_name: lib-db2
+        image: postgres:16
+        ports:
+            - "5434:5432"
+        restart: unless-stopped
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        networks:
+            - localnet
+
+networks:
+    localnet:
+        name: localnet
+        driver: bridge
