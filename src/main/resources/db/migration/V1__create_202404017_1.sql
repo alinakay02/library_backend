@@ -38,7 +38,7 @@ create table book_genres (
 
 create table event (
     id    bigint primary key,
-    date  timestamp(6) with time zone,
+    date  date,
     title varchar(128) not null,
     event varchar(2048) not null,
     photo varchar(255)
@@ -51,7 +51,7 @@ create table genre (
 
 create table item (
     id      bigint primary key,
-    date    timestamp(6) with time zone,
+    date    date,
     title   varchar(128) not null,
     news    varchar(2048) not null,
     photo   varchar(255)
@@ -63,11 +63,13 @@ create table lib_user (
     login    varchar(32) not null unique,
     name     varchar(32) not null,
     surname  varchar(32) not null,
+    patronymic varchar(32),
     password varchar(256) not null
 );
 
 create table order_book (
     id      bigint primary key,
+    date    date,
     state   boolean,
     book_id bigint not null,
     user_id bigint

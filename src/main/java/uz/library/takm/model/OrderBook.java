@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -32,4 +32,6 @@ public class OrderBook implements Serializable {
     @JsonBackReference
     private User user;
 
+    @Column(name = "DATE")
+    private LocalDate date;
 }

@@ -5,13 +5,13 @@ VALUES
 
 INSERT INTO event (id, date, title, photo, event)
 VALUES
-    (nextval('SEQ_LIB_EVENT'), '2024-04-19 10:00:00', 'Литературный вечер', 'photo1.jpg', 'Приглашаем всех на литературный вечер, посвященный произведениям Михаила Булгакова'),
-    (nextval('SEQ_LIB_EVENT'), '2024-04-20 14:00:00', 'Книжная ярмарка', 'photo2.jpg', 'Большая книжная ярмарка с участием известных авторов');
+    (nextval('SEQ_LIB_EVENT'), '2024-04-19', 'Литературный вечер', 'photo1.jpg', 'Приглашаем всех на литературный вечер, посвященный произведениям Михаила Булгакова'),
+    (nextval('SEQ_LIB_EVENT'), '2024-04-20', 'Книжная ярмарка', 'photo2.jpg', 'Большая книжная ярмарка с участием известных авторов');
 
 INSERT INTO item (id, date, title, photo, news)
 VALUES
-    (nextval('SEQ_LIB_ITEM'), '2024-04-19 12:00:00', 'Новинка книжного магазина', 'photo3.jpg', 'Представляем вашему вниманию новый роман "Мастер и Маргарита" от М.Булгакова.'),
-    (nextval('SEQ_LIB_ITEM'), '2024-04-20 09:30:00', 'Специальное предложение', 'photo4.jpg', 'Только сегодня и только у нас - скидка 20% на все произведения Анны Ахматовой.');
+    (nextval('SEQ_LIB_ITEM'), '2024-04-19', 'Новинка книжного магазина', 'photo3.jpg', 'Представляем вашему вниманию новый роман "Мастер и Маргарита" от М.Булгакова.'),
+    (nextval('SEQ_LIB_ITEM'), '2024-04-20', 'Специальное предложение', 'photo4.jpg', 'Только сегодня и только у нас - скидка 20% на все произведения Анны Ахматовой.');
 
 INSERT INTO genre (id, genre_name)
 VALUES
@@ -120,38 +120,38 @@ VALUES
     (14, 14),
     (15, 8);
 
-INSERT INTO lib_user (id, role_id, login, name, surname, password)
+INSERT INTO lib_user (id, role_id, login, name, surname, patronymic, password)
 VALUES
-    (nextval('SEQ_LIB_USER'), 1, 'q', 'Иван', 'Петров', 'password1'),
-    (nextval('SEQ_LIB_USER'), 1, 'qq', 'Петр', 'Войченко', 'password2'),
-    (nextval('SEQ_LIB_USER'), 2, 'qqq', 'Админ', 'Админ', 'adminpassword'),
-    (nextval('SEQ_LIB_USER'), 1, 'qqqq', 'Сидор', 'Сидоров', 'password3'),
-    (nextval('SEQ_LIB_USER'), 1, 'w', 'Елена', 'Смирнова', 'password4'),
-    (nextval('SEQ_LIB_USER'), 2, 'ww', 'Модератор', 'Модератор', 'adminpassword2'),
-    (nextval('SEQ_LIB_USER'), 1, 'www', 'Анна', 'Кузнецова', 'password5'),
-    (nextval('SEQ_LIB_USER'), 1, 'wwww', 'Дмитрий', 'Попов', 'password6'),
-    (nextval('SEQ_LIB_USER'), 1, 'e', 'Светлана', 'Морозова', 'password7'),
-    (nextval('SEQ_LIB_USER'), 1, 'ee', 'Алексей', 'Новиков', 'password8'),
-    (nextval('SEQ_LIB_USER'), 1, 'eee', 'Мария', 'Павлова', 'password9'),
-    (nextval('SEQ_LIB_USER'), 1, 'eeee', 'Артем', 'Волков', 'password10'),
-    (nextval('SEQ_LIB_USER'), 1, 'r', 'Татьяна', 'Соловьева', 'password11'),
-    (nextval('SEQ_LIB_USER'), 2, 'rr', 'Суперадмин', 'Суперадмин', 'superadminpassword'),
-    (nextval('SEQ_LIB_USER'), 1, 'rrr', 'Ольга', 'Иванова', 'password12');
+    (nextval('SEQ_LIB_USER'), 1, 'q', 'Иван', 'Петров', 'Алексеевич', 'password1'),
+    (nextval('SEQ_LIB_USER'), 1, 'qq', 'Петр', 'Войченко', 'Алексеевич', 'password2'),
+    (nextval('SEQ_LIB_USER'), 2, 'qqq', 'Админ', 'Админ', 'Алексеевич', 'adminpassword'),
+    (nextval('SEQ_LIB_USER'), 1, 'qqqq', 'Сидор', 'Сидоров', 'Алексеевич', 'password3'),
+    (nextval('SEQ_LIB_USER'), 1, 'w', 'Елена', 'Смирнова', 'Алексеевна', 'password4'),
+    (nextval('SEQ_LIB_USER'), 2, 'ww', 'Модератор', 'Модератор', 'Алексеевич', 'adminpassword2'),
+    (nextval('SEQ_LIB_USER'), 1, 'www', 'Анна', 'Кузнецова', 'Алексеевна', 'password5'),
+    (nextval('SEQ_LIB_USER'), 1, 'wwww', 'Дмитрий', 'Попов', 'Алексеевич', 'password6'),
+    (nextval('SEQ_LIB_USER'), 1, 'e', 'Светлана', 'Морозова', 'Алексеевна', 'password7'),
+    (nextval('SEQ_LIB_USER'), 1, 'ee', 'Алексей', 'Новиков', 'Алексеевич', 'password8'),
+    (nextval('SEQ_LIB_USER'), 1, 'eee', 'Мария', 'Павлова', 'Алексеевна', 'password9'),
+    (nextval('SEQ_LIB_USER'), 1, 'eeee', 'Артем', 'Волков', 'Алексеевич', 'password10'),
+    (nextval('SEQ_LIB_USER'), 1, 'r', 'Татьяна', 'Соловьева', 'Алексеевна', 'password11'),
+    (nextval('SEQ_LIB_USER'), 2, 'rr', 'Суперадмин', 'Суперадмин', 'Суперадмин','superadminpassword'),
+    (nextval('SEQ_LIB_USER'), 1, 'rrr', 'Ольга', 'Иванова', 'Алексеевна', 'password12');
 
-INSERT INTO order_book (state, book_id, id, user_id)
+INSERT INTO order_book (date, state, book_id, id, user_id)
 VALUES
-    (true, 1, 1, 1),
-    (false, 2, 2, 2),
-    (true, 3, 3, 3),
-    (false, 4, 4, 4),
-    (true, 5, 5, 5),
-    (false, 6, 6, 6),
-    (true, 7, 7, 7),
-    (false, 8, 8, 8),
-    (true, 9, 9, 9),
-    (false, 10, 10, 10),
-    (true, 11, 11, 11),
-    (false, 12, 12, 12),
-    (true, 13, 13, 13),
-    (false, 14, 14, 14),
-    (true, 15, 15, 15);
+    ('2024-04-19', true, 1, 1, 1),
+    ('2023-04-19', false, 2, 2, 2),
+    ('2022-04-19', true, 3, 3, 3),
+    ('2021-04-19', false, 4, 4, 4),
+    ('2020-04-19', true, 5, 5, 5),
+    ('2024-04-19', false, 6, 6, 6),
+    ('2023-04-19', true, 7, 7, 7),
+    ('2022-04-19', false, 8, 8, 8),
+    ('2020-04-19', true, 9, 9, 9),
+    ('2024-04-19', false, 10, 10, 10),
+    ('2023-04-19', true, 11, 11, 11),
+    ('2024-04-19', false, 12, 12, 12),
+    ('2022-04-19', true, 13, 13, 13),
+    ('2021-04-19', false, 14, 14, 14),
+    ('2020-04-19', true, 15, 15, 15);

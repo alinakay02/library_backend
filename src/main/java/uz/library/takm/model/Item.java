@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -26,7 +26,7 @@ public class Item implements Serializable {
     private String news;
 
     @Column(name = "DATE")
-    private Instant date;
+    private LocalDate date;
 
     @Column(name = "PHOTO")
     private String photo;

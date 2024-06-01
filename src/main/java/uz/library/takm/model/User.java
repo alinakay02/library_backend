@@ -34,7 +34,7 @@ public class User implements Serializable {
 
     @Column(name = "PATRONYMIC", length = 32)
     private String patronymic;
-    
+
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_ID", nullable = false)
     private Role role;
