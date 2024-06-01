@@ -36,10 +36,25 @@ public class OrderBookController {
         return orderBookService.findActiveOrders();
     }
 
-    // Одобрение заявки на бронирование
+    // Одобрение заявки на бронирование книги
     @PutMapping("/approve/{id}")
     public ResponseEntity<?> approveOrder(@PathVariable Long id) {
-        orderBookService.approveOrder(id);
-        return ResponseEntity.ok().build();
+        try {
+            orderBookService.approveOrder(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
+    }
+
+    // Отклонение заявки на бронирование книги
+    @PutMapping("/reject/{id}")
+    public ResponseEntity<?> rejectOrder(@PathVariable Long id) {
+        try {
+            orderBookService.rejectOrder(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
+        }
     }
 }

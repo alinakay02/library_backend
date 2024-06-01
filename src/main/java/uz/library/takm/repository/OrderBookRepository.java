@@ -12,12 +12,12 @@ public interface OrderBookRepository extends JpaRepository<OrderBook, Long> {
     @Query("SELECT COUNT(o) FROM OrderBook o WHERE o.date BETWEEN ?1 AND ?2")
     long countByDateBetween(LocalDate start, LocalDate end);
 
-    // Запрос для получения активных заявок (state = null)
+    // Запрос для получения активных заявок (state = null или true)
     @Query("SELECT ob FROM OrderBook ob " +
         "JOIN FETCH ob.book b " +
         "JOIN FETCH b.authors a " +
         "JOIN FETCH ob.user u " +
-        "WHERE ob.state IS NULL")
+        "WHERE ob.state IS NULL OR ob.state = TRUE")
     List<OrderBook> findActiveOrders();
 
 }

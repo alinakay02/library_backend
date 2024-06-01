@@ -68,4 +68,14 @@ public class OrderBookService {
         orderBookRepository.save(orderBook);
     }
 
+    // Метод для отклонения заявки на бронирование книги
+    @Transactional
+    public void rejectOrder(Long id) {
+        OrderBook orderBook = orderBookRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Order not found"));
+        orderBook.setState(false);
+        orderBook.setDate(LocalDate.now()); // Установка даты отклонения
+        orderBookRepository.save(orderBook);
+    }
+
 }
