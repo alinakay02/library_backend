@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.scheduling.annotation.Scheduled;
 
 @Service
 public class OrderBookService {
@@ -56,6 +57,15 @@ public class OrderBookService {
         dto.setUserPatronymic(orderBook.getUser().getPatronymic()); // Отчество пользователя
         dto.setUserCardId(orderBook.getUser().getCardId());    // ID-карта пользователя
         return dto;
+    }
+
+    // Метод для одобрения заявки на бронирование книги
+    @Transactional
+    public void approveOrder(Long id) {
+        OrderBook orderBook = orderBookRepository.findById(id).orElseThrow(() -> new RuntimeException("Order not found"));
+        orderBook.setState(true);
+        orderBook.setDate(LocalDate.now());  // Установка текущей даты как даты одобрения
+        orderBookRepository.save(orderBook);
     }
 
 }

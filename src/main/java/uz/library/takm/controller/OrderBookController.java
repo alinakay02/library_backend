@@ -4,6 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.ResponseEntity;
+
 import uz.library.takm.dto.OrderBookDto;
 import uz.library.takm.service.OrderBookService;
 
@@ -30,5 +34,12 @@ public class OrderBookController {
     @GetMapping("/new")
     public List<OrderBookDto> getActiveOrders() {
         return orderBookService.findActiveOrders();
+    }
+
+    // Одобрение заявки на бронирование
+    @PutMapping("/approve/{id}")
+    public ResponseEntity<?> approveOrder(@PathVariable Long id) {
+        orderBookService.approveOrder(id);
+        return ResponseEntity.ok().build();
     }
 }
