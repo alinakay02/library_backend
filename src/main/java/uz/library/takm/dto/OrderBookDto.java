@@ -19,4 +19,6 @@ public class OrderBookDto {
     private String userSurname;       // Фамилия пользователя
     private String userPatronymic;    // Отчество пользователя
     private String userCardId;        // ID-карта пользователя
+    private String year;              // Год издания книги
+    private String publisher;         // Издательство
 }

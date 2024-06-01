@@ -9,6 +9,8 @@ import java.util.List;
 public class BookDto {
     private Long id;
     private String title;
+    private String year;
+    private String publisher;
     private List<AuthorDto> authors;
     private List<GenreDto> genres;
 }

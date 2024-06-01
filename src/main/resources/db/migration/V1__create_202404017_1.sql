@@ -23,7 +23,9 @@ create table author (
 
 create table book (
     id    bigint primary key,
-    title varchar(64)
+    title varchar(64),
+    year varchar(4),
+    publisher varchar(64)
 );
 
 create table book_authors (

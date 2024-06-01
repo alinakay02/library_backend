@@ -22,6 +22,12 @@ public class Book implements Serializable {
     @Column(name = "TITLE", length = 64)
     private String title;
 
+    @Column(name = "YEAR", length = 4)
+    private String year;
+
+    @Column(name = "PUBLISHER", length = 64)
+    private String publisher;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
         name = "BOOK_AUTHORS",

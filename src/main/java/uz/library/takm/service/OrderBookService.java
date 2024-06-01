@@ -51,19 +51,20 @@ public class OrderBookService {
     private OrderBookDto convertToOrderBookDto(OrderBook orderBook) {
         OrderBookDto dto = new OrderBookDto();
         dto.setId(orderBook.getId());
-        dto.setBookId(orderBook.getBook().getId());            // Задаем ID книги
-        dto.setUserId(orderBook.getUser().getId());            // Задаем ID пользователя
-        dto.setState(orderBook.getState());                    // Состояние заявки
-        dto.setDate(orderBook.getDate());                      // Дата бронирования
-
-        dto.setBookTitle(orderBook.getBook().getTitle());      // Наименование книги
+        dto.setBookId(orderBook.getBook().getId());
+        dto.setUserId(orderBook.getUser().getId());
+        dto.setState(orderBook.getState());
+        dto.setDate(orderBook.getDate());
+        dto.setBookTitle(orderBook.getBook().getTitle());
+        dto.setYear(orderBook.getBook().getYear());  // Год издания
+        dto.setPublisher(orderBook.getBook().getPublisher());  // Издатель
         dto.setAuthorsNames(orderBook.getBook().getAuthors().stream()
             .map(a -> a.getName() + " " + a.getSurname())
             .collect(Collectors.joining(", ")));
-        dto.setUserName(orderBook.getUser().getName());        // Имя пользователя
-        dto.setUserSurname(orderBook.getUser().getSurname());  // Фамилия пользователя
-        dto.setUserPatronymic(orderBook.getUser().getPatronymic()); // Отчество пользователя
-        dto.setUserCardId(orderBook.getUser().getCardId());    // ID-карта пользователя
+        dto.setUserName(orderBook.getUser().getName());
+        dto.setUserSurname(orderBook.getUser().getSurname());
+        dto.setUserPatronymic(orderBook.getUser().getPatronymic());
+        dto.setUserCardId(orderBook.getUser().getCardId());
         return dto;
     }
 
