@@ -1,7 +1,13 @@
 package uz.library.takm.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import uz.library.takm.model.OrderBook;
 
-public interface OrderBookRepository extends CrudRepository<OrderBook, Long> {
+import java.time.LocalDate;
+
+public interface OrderBookRepository extends JpaRepository<OrderBook, Long> {
+
+    @Query("SELECT COUNT(o) FROM OrderBook o WHERE o.date BETWEEN ?1 AND ?2")
+    long countByDateBetween(LocalDate start, LocalDate end);
 }
