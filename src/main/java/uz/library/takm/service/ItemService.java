@@ -39,4 +39,15 @@ public class ItemService {
         dto.setPhoto(item.getPhoto());
         return dto;
     }
+
+    // Добавление новости
+    @Transactional
+    public Item addItem(ItemDto itemDto) {
+        Item item = new Item();
+        item.setTitle(itemDto.getTitle());
+        item.setNews(itemDto.getNews());
+        item.setPhoto(itemDto.getPhoto());
+        item.setDate(itemDto.getDate());
+        return itemRepository.save(item);
+    }
 }

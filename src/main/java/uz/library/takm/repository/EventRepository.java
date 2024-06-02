@@ -8,8 +8,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
-    @Query("SELECT e FROM Event e WHERE e.date BETWEEN ?1 AND ?2")
     List<Event> findByDateBetween(LocalDate start, LocalDate end);
-
-    List<Event> findAll();
 }

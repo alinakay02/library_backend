@@ -16,29 +16,36 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    // Внедрение зависимости через конструктор для EventRepository
     @Autowired
     public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
 
-    // Метод для получения всех мероприятий, возвращает список DTO
     @Transactional(readOnly = true)
     public List<EventDto> findAllEvents() {
         return eventRepository.findAll().stream()
-            .map(this::convertToEventDto) // Преобразование каждой сущности в DTO
+            .map(this::convertToEventDto)
             .collect(Collectors.toList());
     }
 
-    // Метод для получения мероприятий текущего месяца
     @Transactional(readOnly = true)
     public List<EventDto> findEventsByDateBetween(LocalDate start, LocalDate end) {
         return eventRepository.findByDateBetween(start, end).stream()
-            .map(this::convertToEventDto) // Преобразование каждой сущности в DTO
+            .map(this::convertToEventDto)
             .collect(Collectors.toList());
     }
 
-    // Вспомогательный метод для преобразования сущности Event в EventDto
+    @Transactional
+    public EventDto addEvent(EventDto eventDto) {
+        Event event = new Event();
+        event.setTitle(eventDto.getTitle());
+        event.setEvent(eventDto.getEvent());
+        event.setDate(eventDto.getDate());
+        event.setPhoto(eventDto.getPhoto());
+        Event savedEvent = eventRepository.save(event);
+        return convertToEventDto(savedEvent);
+    }
+
     private EventDto convertToEventDto(Event event) {
         EventDto dto = new EventDto();
         dto.setId(event.getId());
