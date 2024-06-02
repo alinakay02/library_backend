@@ -1,9 +1,7 @@
 package uz.library.takm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.library.takm.service.UserService;
 
 @RestController
@@ -21,5 +19,11 @@ public class UserController {
     @GetMapping("/count")
     public long getUserCount() {
         return userService.countUsers();
+    }
+
+    // Метод для смены пароля
+    @PutMapping("/{userId}/changePassword")
+    public void changePassword(@PathVariable Long userId, @RequestBody String newPassword) {
+        userService.changePassword(userId, newPassword);
     }
 }

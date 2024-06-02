@@ -6,7 +6,7 @@ import uz.library.takm.model.User;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
     User findUserByLogin(String login);
 
