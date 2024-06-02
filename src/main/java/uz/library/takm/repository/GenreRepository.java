@@ -1,7 +1,10 @@
 package uz.library.takm.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import uz.library.takm.model.Genre;
 
-public interface GenreRepository extends CrudRepository<Genre, Long> {
+import java.util.Optional;
+
+public interface GenreRepository extends JpaRepository<Genre, Long> {
+    Optional<Genre> findByGenreName(String genreName);
 }

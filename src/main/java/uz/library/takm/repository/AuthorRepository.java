@@ -1,7 +1,10 @@
 package uz.library.takm.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import uz.library.takm.model.Author;
 
-public interface AuthorRepository extends CrudRepository<Author, Long> {
+import java.util.Optional;
+
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+    Optional<Author> findByNameAndSurnameAndPatronymic(String name, String surname, String patronymic);
 }
