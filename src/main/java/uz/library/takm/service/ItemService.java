@@ -8,6 +8,7 @@ import uz.library.takm.model.Item;
 import uz.library.takm.repository.ItemRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,6 +28,12 @@ public class ItemService {
         return itemRepository.findAll().stream()
             .map(this::convertToItemDto) // Преобразование каждой сущности в DTO
             .collect(Collectors.toList());
+    }
+
+    // Получение одной новости по идентификатору
+    @Transactional(readOnly = true)
+    public Optional<ItemDto> getItemById(Long id) {
+        return itemRepository.findById(id).map(this::convertToItemDto);
     }
 
     // Вспомогательный метод для преобразования сущности Item в ItemDto

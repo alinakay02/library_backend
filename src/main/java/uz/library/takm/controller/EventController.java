@@ -7,6 +7,7 @@ import uz.library.takm.service.EventService;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/events")
@@ -37,5 +38,11 @@ public class EventController {
     @PostMapping("/add")
     public EventDto addEvent(@RequestBody EventDto eventDto) {
         return eventService.addEvent(eventDto);
+    }
+
+    // Получение мероприятия по ID
+    @GetMapping("/{id}")
+    public Optional<EventDto> getEventById(@PathVariable Long id) {
+        return eventService.getEventById(id);
     }
 }

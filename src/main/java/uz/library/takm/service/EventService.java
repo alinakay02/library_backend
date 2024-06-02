@@ -9,6 +9,7 @@ import uz.library.takm.repository.EventRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,6 +45,11 @@ public class EventService {
         event.setPhoto(eventDto.getPhoto());
         Event savedEvent = eventRepository.save(event);
         return convertToEventDto(savedEvent);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<EventDto> getEventById(Long id) {
+        return eventRepository.findById(id).map(this::convertToEventDto);
     }
 
     private EventDto convertToEventDto(Event event) {
