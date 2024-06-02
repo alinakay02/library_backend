@@ -25,8 +25,8 @@ public class ItemController {
 
     // Получение списка всех новостей
     @GetMapping("/getAll")
-    public List<Item> getAllNews() {
-        return (List<Item>) itemRepository.findAll();
+    public List<ItemDto> getAllNews() {
+        return itemService.findAllItems();
     }
 
     // Добавление новости
@@ -39,5 +39,11 @@ public class ItemController {
     @GetMapping("/{id}")
     public Optional<ItemDto> getItemById(@PathVariable Long id) {
         return itemService.getItemById(id);
+    }
+
+    // Обновление новости
+    @PutMapping("/update")
+    public Item updateItem(@RequestBody ItemDto itemDto) {
+        return itemService.updateItem(itemDto);
     }
 }

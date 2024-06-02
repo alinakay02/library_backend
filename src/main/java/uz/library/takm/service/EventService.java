@@ -24,14 +24,14 @@ public class EventService {
 
     @Transactional(readOnly = true)
     public List<EventDto> findAllEvents() {
-        return eventRepository.findAll().stream()
+        return eventRepository.findAllByOrderByDateDesc().stream()
             .map(this::convertToEventDto)
             .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public List<EventDto> findEventsByDateBetween(LocalDate start, LocalDate end) {
-        return eventRepository.findByDateBetween(start, end).stream()
+        return eventRepository.findByDateBetweenOrderByDateAsc(start, end).stream()
             .map(this::convertToEventDto)
             .collect(Collectors.toList());
     }
@@ -50,6 +50,22 @@ public class EventService {
     @Transactional(readOnly = true)
     public Optional<EventDto> getEventById(Long id) {
         return eventRepository.findById(id).map(this::convertToEventDto);
+    }
+
+    // Метод для обновления мероприятия
+    @Transactional
+    public Event updateEvent(EventDto eventDto) {
+        Optional<Event> existingEventOpt = eventRepository.findById(eventDto.getId());
+        if (existingEventOpt.isPresent()) {
+            Event existingEvent = existingEventOpt.get();
+            existingEvent.setTitle(eventDto.getTitle());
+            existingEvent.setEvent(eventDto.getEvent());
+            existingEvent.setDate(eventDto.getDate());
+            existingEvent.setPhoto(eventDto.getPhoto());
+            return eventRepository.save(existingEvent);
+        } else {
+            throw new RuntimeException("Event not found with id " + eventDto.getId());
+        }
     }
 
     private EventDto convertToEventDto(Event event) {

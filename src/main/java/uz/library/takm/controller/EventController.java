@@ -3,6 +3,7 @@ package uz.library.takm.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import uz.library.takm.dto.EventDto;
+import uz.library.takm.model.Event;
 import uz.library.takm.service.EventService;
 
 import java.time.LocalDate;
@@ -44,5 +45,11 @@ public class EventController {
     @GetMapping("/{id}")
     public Optional<EventDto> getEventById(@PathVariable Long id) {
         return eventService.getEventById(id);
+    }
+
+    // Обновление мероприятия
+    @PutMapping("/update")
+    public Event updateEvent(@RequestBody EventDto eventDto) {
+        return eventService.updateEvent(eventDto);
     }
 }

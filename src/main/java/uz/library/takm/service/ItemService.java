@@ -24,9 +24,9 @@ public class ItemService {
 
     // Метод для получения всех новостей, возвращает список DTO
     @Transactional(readOnly = true)
-    public List<ItemDto> findAllNews() {
-        return itemRepository.findAll().stream()
-            .map(this::convertToItemDto) // Преобразование каждой сущности в DTO
+    public List<ItemDto> findAllItems() {
+        return itemRepository.findAllByOrderByDateDesc().stream()
+            .map(this::convertToItemDto)
             .collect(Collectors.toList());
     }
 
@@ -56,5 +56,21 @@ public class ItemService {
         item.setPhoto(itemDto.getPhoto());
         item.setDate(itemDto.getDate());
         return itemRepository.save(item);
+    }
+
+    // Обновление новости - после Редактирования
+    @Transactional
+    public Item updateItem(ItemDto itemDto) {
+        Optional<Item> existingItemOpt = itemRepository.findById(itemDto.getId());
+        if (existingItemOpt.isPresent()) {
+            Item existingItem = existingItemOpt.get();
+            existingItem.setTitle(itemDto.getTitle());
+            existingItem.setNews(itemDto.getNews());
+            existingItem.setPhoto(itemDto.getPhoto());
+            existingItem.setDate(itemDto.getDate());
+            return itemRepository.save(existingItem);
+        } else {
+            throw new RuntimeException("Item not found with id " + itemDto.getId());
+        }
     }
 }
