@@ -11,6 +11,7 @@ public class BookDto {
     private String title;
     private String year;
     private String publisher;
+    private String pdfPath;
     private List<AuthorDto> authors;
     private List<GenreDto> genres;
 }

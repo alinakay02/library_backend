@@ -25,7 +25,8 @@ create table book (
     id    bigint primary key,
     title varchar(64),
     year varchar(4),
-    publisher varchar(64)
+    publisher varchar(64),
+    pdf_path varchar(512)
 );
 
 create table book_authors (

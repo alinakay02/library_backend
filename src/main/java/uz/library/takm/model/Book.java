@@ -28,6 +28,9 @@ public class Book implements Serializable {
     @Column(name = "PUBLISHER", length = 64)
     private String publisher;
 
+    @Column(name = "PDF_PATH", length = 512)
+    private String pdfPath;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
         name = "BOOK_AUTHORS",

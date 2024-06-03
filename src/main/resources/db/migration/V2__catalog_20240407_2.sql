@@ -66,23 +66,23 @@ VALUES
     (nextval('SEQ_AUTHOR'), 'Антон', 'Павлович', 'Чехов'),
     (nextval('SEQ_AUTHOR'), 'Борис', 'Леонидович', 'Пастернак');
 
-INSERT INTO book (id, title, year, publisher)
+INSERT INTO book (id, title, year, publisher, pdf_path)
 VALUES
-    (nextval('SEQ_BOOK'), 'Мастер и Маргарита', '2010', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Поэмы', '2000', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Двенадцать', '2012', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Анна Ахматова. Стихотворения', '2000', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Евгений Онегин', '2020', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Мертвые души', '2009', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Борис Годунов', '2008', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Дубровский', '2000', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Война и мир', '2010', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Преступление и наказание', '2010', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Невские мелодии', '2007', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Герой нашего времени', '2016', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Рудин', '2019', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Дама с собачкой', '2018', 'Дрофа'),
-    (nextval('SEQ_BOOK'), 'Доктор Живаго', '2009', 'Дрофа');
+    (nextval('SEQ_BOOK'), 'Мастер и Маргарита', '2010', 'Дрофа', 'test.pdf'),
+    (nextval('SEQ_BOOK'), 'Поэмы', '2000', 'Дрофа', ''),
+    (nextval('SEQ_BOOK'), 'Двенадцать', '2012', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Анна Ахматова. Стихотворения', '2000', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Евгений Онегин', '2020', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Мертвые души', '2009', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Борис Годунов', '2008', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Дубровский', '2000', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Война и мир', '2010', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Преступление и наказание', '2010', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Невские мелодии', '2007', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Герой нашего времени', '2016', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Рудин', '2019', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Дама с собачкой', '2018', 'Дрофа', 'uploads/конспект вебинаров.pdf'),
+    (nextval('SEQ_BOOK'), 'Доктор Живаго', '2009', 'Дрофа', 'uploads/конспект вебинаров.pdf');
 
 INSERT INTO book_authors(author_id, book_id)
 VALUES

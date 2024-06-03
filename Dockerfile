@@ -40,7 +40,7 @@ RUN addgroup -g 10001 cbias \
 USER cbias:admin
 
 # Set the working directory
-WORKDIR /opt/workspace-runtime
+WORKDIR /uploads
 
 # Copy the extracted layers from the builder
 COPY --from=builder $BUILD_PATH/extracted/spring-boot-loader/ ./
