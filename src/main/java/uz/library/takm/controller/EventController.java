@@ -27,14 +27,6 @@ public class EventController {
         return eventService.findAllEvents();
     }
 
-    // Получение списка мероприятий на текущий месяц
-    @GetMapping("/currentMonth")
-    public List<EventDto> getEventsCurrentMonth() {
-        LocalDate start = LocalDate.now().withDayOfMonth(1);
-        LocalDate end = start.plusMonths(1).minusDays(1);
-        return eventService.findEventsByDateBetween(start, end);
-    }
-
     // Добавление мероприятия
     @PostMapping("/add")
     public EventDto addEvent(@RequestBody EventDto eventDto) {

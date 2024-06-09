@@ -24,7 +24,7 @@ public class OrderBookController {
         this.orderBookService = orderBookService;
     }
 
-    // Метод для получения количества заявок на бронирование книг за текущий календарный год
+    // Запрос для получения количества заявок на бронирование книг за текущий календарный год
     @GetMapping("/count-current-year")
     public long getCountOrdersForCurrentYear() {
         return orderBookService.countOrdersForCurrentYear();

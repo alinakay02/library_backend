@@ -29,13 +29,6 @@ public class EventService {
             .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
-    public List<EventDto> findEventsByDateBetween(LocalDate start, LocalDate end) {
-        return eventRepository.findByDateBetweenOrderByDateAsc(start, end).stream()
-            .map(this::convertToEventDto)
-            .collect(Collectors.toList());
-    }
-
     @Transactional
     public EventDto addEvent(EventDto eventDto) {
         Event event = new Event();

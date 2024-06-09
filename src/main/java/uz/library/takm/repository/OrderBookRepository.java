@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface OrderBookRepository extends JpaRepository<OrderBook, Long> {
     // Запрос для получения количества заявок за текущий год
-    @Query("SELECT COUNT(o) FROM OrderBook o WHERE o.date BETWEEN ?1 AND ?2")
+    @Query(value = "SELECT COUNT(o) FROM OrderBook o WHERE o.date BETWEEN ?1 AND ?2")
     long countByDateBetween(LocalDate start, LocalDate end);
 
     // Запрос для получения заявок с state = null
