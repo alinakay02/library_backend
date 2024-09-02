@@ -21,15 +21,16 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
-@RequestMapping("/users")
+@RestController // Аннотация для обозначения контроллера REST API
+@RequestMapping("/users") // Базовый URL для всех методов в этом контроллере
 public class UserController {
 
+    // Внедрение зависимостей для сервисов и утилит
     private final UserService userService;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    @Autowired
+    @Autowired // Конструктор для автоматического внедрения зависимостей
     public UserController(UserService userService, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
@@ -38,33 +39,30 @@ public class UserController {
 
     @GetMapping("/count")
     public long getUserCount() {
+        // Метод для получения количества пользователей
         return userService.countUsers();
     }
 
     @PutMapping("/{userId}/changePassword")
     public void changePassword(@PathVariable Long userId, @RequestBody String newPassword) {
+        // Метод для изменения пароля пользователя
         userService.changePassword(userId, newPassword);
-    }
-
-    @GetMapping("/{userId}")
-    public User getUserById(@PathVariable Long userId) {
-        return userService.getUserById(userId);
     }
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody UserLoginDto userLoginDto) {
         try {
-            // Попытка аутентификации
+            // Аутентификация пользователя с помощью UsernamePasswordAuthenticationToken
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userLoginDto.getLogin(), userLoginDto.getPassword())
             );
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication); // Установка контекста аутентификации
 
-            // Генерация JWT токена
+            // Генерация токена JWT для аутентифицированного пользователя
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String jwtToken = jwtUtil.generateToken(userDetails);
 
-            // Получение дополнительных данных пользователя
+            // Формирование ответа с JWT токеном и информацией о пользователе
             User user = userService.findByLogin(userLoginDto.getLogin());
             Map<String, Object> response = new HashMap<>();
             response.put("token", jwtToken);
@@ -73,11 +71,13 @@ public class UserController {
 
             return ResponseEntity.ok(response);
         } catch (UsernameNotFoundException e) {
+            // Обработка ошибки: пользователь не найден
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Пользователь с таким логином не существует");
         } catch (BadCredentialsException e) {
-            System.out.println("обработка ошибки");
+            // Обработка ошибки: неверный пароль
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Неверный пароль");
         } catch (Exception e) {
+            // Обработка других ошибок сервера
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ошибка связи с сервером");
         }
     }
@@ -85,10 +85,11 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody UserDto userDto) {
         try {
+            // Регистрация нового пользователя и возвращение информации о нем
             User user = userService.register(userDto);
             return ResponseEntity.ok(user);
         } catch (RuntimeException e) {
-            // Возвращаем клиенту статус ошибки с сообщением из исключения
+            // В случае ошибки при регистрации, возвращается сообщение об ошибке
             return ResponseEntity
                 .badRequest()
                 .body(Collections.singletonMap("error", e.getMessage()));

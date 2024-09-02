@@ -6,7 +6,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +18,10 @@ import uz.library.takm.repository.RoleRepository;
 import uz.library.takm.repository.UserRepository;
 import uz.library.takm.util.PasswordUtils;
 
-import java.util.Collections;
-
-@Service
+@Service // Аннотация, указывающая, что это компонент сервиса в Spring
 public class UserService implements UserDetailsService {
 
+    // Внедрение зависимостей через конструктор
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
@@ -35,6 +33,7 @@ public class UserService implements UserDetailsService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // Метод для подсчета количества пользователей в базе данных
     public long countUsers() {
         return userRepository.count();
     }
@@ -42,15 +41,15 @@ public class UserService implements UserDetailsService {
     @Transactional
     public void changePassword(Long userId, String newPassword) {
         User user = userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
+            .orElseThrow(() -> new RuntimeException("User not found")); // Проверка на существование пользователя
 
-        String hashedPassword = PasswordUtils.hashPassword(newPassword);
+        String hashedPassword = PasswordUtils.hashPassword(newPassword); // Хэширование нового пароля
         user.setPassword(hashedPassword);
 
-        userRepository.save(user);
+        userRepository.save(user); // Сохранение пользователя с новым паролем
     }
 
-    @Override
+    @Override // Переопределение метода из UserDetailsService для загрузки пользователя по логину
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userRepository.findByLogin(login)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + login));
@@ -58,48 +57,38 @@ public class UserService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
             .username(user.getLogin())
             .password(user.getPassword())
-            .authorities(new SimpleGrantedAuthority(user.getRole().getRoleName().name()))
+            .authorities(new SimpleGrantedAuthority(user.getRole().getRoleName().name())) // Присваивание роли пользователю
             .build();
     }
 
+    // Метод для поиска пользователя по логину
     public User findByLogin(String login) {
         return userRepository.findByLogin(login)
             .orElseThrow(() -> new RuntimeException("User not found with login: " + login));
     }
 
-    public User getUserById(Long userId) {
-        return userRepository.findById(userId)
-            .orElseThrow(() -> new RuntimeException("User not found"));
-    }
-
+    // Метод для регистрации нового пользователя
     public User register(UserDto userDto) {
-        /*if (userRepository.findByLogin(userDto.getLogin()).isPresent()) {
-            throw new RuntimeException("User already exists");
-        }*/
         if (userRepository.findByLogin(userDto.getLogin()).isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists"); // Проверка на уникальность логина
         }
 
         if (userDto.getPassword().length() < 8 || !userDto.getPassword().matches(".*\\d.*")) {
             throw new RuntimeException("Пароль не удовлетворяет условиям! Введите минимум 8 символов и 1 цифру");
         }
 
-        User user = new User();
+        User user = new User(); // Создание нового объекта пользователя
         user.setLogin(userDto.getLogin());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDto.getPassword())); // Шифрование пароля
         user.setName(userDto.getName());
         user.setSurname(userDto.getSurname());
         user.setPatronymic(userDto.getPatronymic());
         user.setCardId(userDto.getCardId());
 
         Role userRole = roleRepository.findByRoleName(RoleName.User)
-            .orElseThrow(() -> new RuntimeException("Role not found"));
+            .orElseThrow(() -> new RuntimeException("Role not found")); // Проверка на существование роли
         user.setRole(userRole);
 
-        return userRepository.save(user);
-    }
-
-    private PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return userRepository.save(user); // Сохранение нового пользователя в базе данных
     }
 }

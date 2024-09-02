@@ -25,8 +25,8 @@ spring:
             max-request-size: 40MB
 
 jwt:
-    secret: supersecretkeythatshouldberandomand1234567890longenoughtobesecure
-    expiration: 43200
+    secret: evgkjrefnkiejdreu57683u3nfjf3483nv83432jrb3u432b234jf
+    expiration: 10800
 server:
     port: 8084
 
